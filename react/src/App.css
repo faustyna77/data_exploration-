@@ -1,0 +1,17 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+  background: linear-gradient(135deg, #2c2c54, #24243e);
+  color: #fff;
+}
+
+.chart-container {
+  background: #1e1e2f;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}

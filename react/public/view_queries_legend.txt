@@ -1,0 +1,41 @@
+
+1. **CLINIC** - SELECT * FROM appointments LIMIT 5;
+2. **CLINIC** - SELECT d.first_name, d.last_name, COUNT(a.appointment_id) AS total_appointments FROM doctors d JOIN appointments a ON d.doctor_id = a.doctor_id GROUP BY d.first_name, d.last_name;
+3. **CLINIC** - SELECT first_name, last_name FROM patients WHERE patient_id IN (SELECT patient_id FROM appointments WHERE diagnosis = 'Depression');
+4. **FLIGHT** - SELECT * FROM flights LIMIT 5;
+5. **FLIGHT** - SELECT a.airline, COUNT(f.flight_number) AS total_flights FROM flights f JOIN airlines a ON f.airline = a.iata_code GROUP BY a.airline ORDER BY total_flights DESC;
+6. **FLIGHT** - SELECT ap.airport, COUNT(f.flight_number) AS total_departures FROM airports ap JOIN flights f ON ap.iata_code = f.origin_airport GROUP BY ap.airport HAVING COUNT(f.flight_number) > 10;
+7. **TRIP** - SELECT * FROM Trips LIMIT 5;
+8. **TRIP** - SELECT s.station_name, COUNT(t.trip_id) AS total_trips FROM Trips t JOIN Stations s ON t.start_station_id = s.station_id GROUP BY s.station_name ORDER BY total_trips DESC;
+9. **TRIP** - SELECT u.birth_year, u.gender, COUNT(t.trip_id) AS total_trips FROM Users u JOIN Trips t ON u.user_id = t.user_id GROUP BY u.birth_year, u.gender HAVING COUNT(t.trip_id) > 5;
+10. **CLINIC** - SELECT * FROM appointments LIMIT 5;
+11. **CLINIC** - SELECT d.first_name, d.last_name, COUNT(a.appointment_id) AS total_appointments FROM doctors d JOIN appointments a ON d.doctor_id = a.doctor_id GROUP BY d.first_name, d.last_name;
+12. **CLINIC** - SELECT first_name, last_name FROM patients WHERE patient_id IN (SELECT patient_id FROM appointments WHERE diagnosis = 'Depression');
+13. **FLIGHT** - SELECT * FROM flights LIMIT 5;
+14. **FLIGHT** - SELECT a.airline, COUNT(f.flight_number) AS total_flights FROM flights f JOIN airlines a ON f.airline = a.iata_code GROUP BY a.airline ORDER BY total_flights DESC;
+15. **FLIGHT** - SELECT ap.airport, COUNT(f.flight_number) AS total_departures FROM airports ap JOIN flights f ON ap.iata_code = f.origin_airport GROUP BY ap.airport HAVING COUNT(f.flight_number) > 10;
+16. **TRIP** - SELECT * FROM Trips LIMIT 5;
+17. **TRIP** - SELECT s.station_name, COUNT(t.trip_id) AS total_trips FROM Trips t JOIN Stations s ON t.start_station_id = s.station_id GROUP BY s.station_name ORDER BY total_trips DESC;
+18. **TRIP** - SELECT u.birth_year, u.gender, COUNT(t.trip_id) AS total_trips FROM Users u JOIN Trips t ON u.user_id = t.user_id GROUP BY u.birth_year, u.gender HAVING COUNT(t.trip_id) > 5;
+19. **CLINIC** - SELECT * FROM appointments LIMIT 5;
+20. **CLINIC** - SELECT * FROM appointments LIMIT 5;
+21. **CLINIC** - SELECT d.first_name, d.last_name, COUNT(a.appointment_id) AS total_appointments FROM doctors d JOIN appointments a ON d.doctor_id = a.doctor_id GROUP BY d.first_name, d.last_name;
+22. **CLINIC** - SELECT first_name, last_name FROM patients WHERE patient_id IN (SELECT patient_id FROM appointments WHERE diagnosis = 'Depression');
+23. **FLIGHT** - SELECT * FROM flights LIMIT 5;
+24. **FLIGHT** - SELECT a.airline, COUNT(f.flight_number) AS total_flights FROM flights f JOIN airlines a ON f.airline = a.iata_code GROUP BY a.airline ORDER BY total_flights DESC;
+25. **FLIGHT** - SELECT ap.airport, COUNT(f.flight_number) AS total_departures FROM airports ap JOIN flights f ON ap.iata_code = f.origin_airport GROUP BY ap.airport HAVING COUNT(f.flight_number) > 10;
+26. **TRIP** - SELECT * FROM Trips LIMIT 5;
+27. **TRIP** - SELECT s.station_name, COUNT(t.trip_id) AS total_trips FROM Trips t JOIN Stations s ON t.start_station_id = s.station_id GROUP BY s.station_name ORDER BY total_trips DESC;
+28. **TRIP** - SELECT u.birth_year, u.gender, COUNT(t.trip_id) AS total_trips FROM Users u JOIN Trips t ON u.user_id = t.user_id GROUP BY u.birth_year, u.gender HAVING COUNT(t.trip_id) > 5;
+
+
+
+29. **CLINIC** - SELECT doctor_id, COUNT(appointment_id) AS appointments_per_doctor FROM appointments GROUP BY doctor_id;
+30. **FLIGHT** - SELECT destination_airport, COUNT(flight_number) AS arrivals FROM flights GROUP BY destination_airport ORDER BY arrivals DESC;
+31. **TRIP** - SELECT AVG(duration) AS avg_trip_duration FROM Trips;
+32. **CLINIC** - SELECT diagnosis, COUNT(*) AS diagnosis_count FROM appointments GROUP BY diagnosis;
+33. **FLIGHT** - SELECT origin_airport, destination_airport, COUNT(flight_number) AS total_flights FROM flights GROUP BY origin_airport, destination_airport;
+34. **TRIP** - SELECT start_station_id, end_station_id, COUNT(*) AS trip_count FROM Trips GROUP BY start_station_id, end_station_id;
+35. **CLINIC** - SELECT appointment_date, COUNT(*) AS daily_appointments FROM appointments GROUP BY appointment_date;
+36. **FLIGHT** - SELECT airline, AVG(departure_delay) AS avg_delay FROM flights GROUP BY airline HAVING AVG(departure_delay) > 10;
+37. **TRIP** - SELECT user_id, SUM(duration) AS total_duration FROM Trips GROUP BY user_id ORDER BY total_duration DESC;

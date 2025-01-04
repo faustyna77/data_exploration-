@@ -1,0 +1,91 @@
+baza z airplanes:
+a) zapytania proste:
+SELECT * FROM airports LIMIT 12
+SELECT * FROM airlines LIMIT 12
+SELECT departure_delay FROM flights LIMIT 12
+SELECT airport, city, state
+FROM airports
+WHERE country = 'United States';
+LIMIT 10
+
+
+b) zapytania grupowane 
+SELECT day_of_week, AVG(arrival_delay) AS avg_arrival_delay
+FROM flights
+GROUP BY day_of_week
+ORDER BY day_of_week
+LIMIT 10
+
+SELECT airline, COUNT(*) AS total_flights
+FROM flights
+GROUP BY airline
+ORDER BY total_flights DESC
+LIMIT 10
+
+
+SELECT destination_airport, AVG(arrival_delay) AS avg_arrival_delay
+FROM flights
+GROUP BY destination_airport
+ORDER BY avg_arrival_delay DESC
+LIMIT 10
+
+
+c) zapytania z joiny
+SELECT f.flight_number, f.destination_airport, f.destination_airport, c.cancellation_description
+FROM flights f
+JOIN cancellation_codes c ON f.cancellation_reason = c.cancellation_reason
+WHERE f.cancelled = 1
+LIMIT 10
+
+
+SELECT f.flight_number, a.city, a.state
+FROM flights f
+JOIN airports a ON f.destination_airport = a.iata_code
+LIMIT 10
+
+
+ 
+SELECT cancellation_codes.cancellation_reason,flights.flight_number FROM cancellation_codes
+JOIN flights ON cancellation_codes.cancellation_reason=cancellation_codes.cancellation_reason
+LIMIT 10
+
+
+
+c)
+podzapytania
+SELECT f.flight_number, f.destination_airport, f.destination_airport, f.cancellation_reason
+FROM flights f
+WHERE f.cancellation_reason = (
+    SELECT cancellation_reason
+    FROM flights
+    WHERE cancellation_reason IS NOT NULL
+    GROUP BY cancellation_reason
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
+)
+LIMIT 10
+
+
+SELECT flight_number, destination_airport, destination_airport, arrival_delay
+FROM flights
+WHERE destination_airport IN (
+    SELECT destination_airport
+    FROM flights
+    GROUP BY destination_airport
+    HAVING AVG(arrival_delay) > 30
+)
+LIMIT 10
+
+
+
+SELECT flight_number, destination_airport, destination_airport, airline
+FROM flights
+WHERE airline = (
+    SELECT airline
+    FROM flights
+    GROUP BY airline
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
+)
+LIMIT 10
+

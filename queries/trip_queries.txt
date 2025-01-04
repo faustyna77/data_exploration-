@@ -1,0 +1,88 @@
+a) proste zapytania
+
+SELECT * FROM users
+LIMIT 10
+
+SELECT station_name, latitude, longitude FROM stations
+LIMIT 10
+
+SELECT * FROM trips WHERE tripduration > 1800
+LIMIT 10
+
+b) zapytania grupujące
+SELECT gender, COUNT(*) AS trip_count
+FROM trips t
+JOIN users u ON t.user_id = u.user_id
+GROUP BY gender
+LIMIT 10
+
+
+SELECT user_id, AVG(tripduration) AS average_tripduration
+FROM trips
+GROUP BY user_id
+LIMIT 10
+
+
+SELECT start_station_id, COUNT(*) AS trips_started
+FROM trips
+GROUP BY start_station_id
+LIMIT 10
+
+c) zapytania z podzapytaniami
+
+SELECT * FROM trips
+WHERE start_station_id = (
+    SELECT start_station_id
+    FROM trips
+    GROUP BY start_station_id
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
+)
+LIMIT 10
+
+
+
+SELECT * FROM users
+WHERE user_id IN (
+    SELECT user_id
+    FROM trips
+    WHERE start_station_id = (
+        SELECT station_id
+        FROM stations
+        ORDER BY SQRT(POW(latitude, 2) + POW(longitude, 2)) DESC
+        LIMIT 1
+    )
+)
+LIMIT 10
+
+
+
+SELECT * FROM trips
+WHERE tripduration > (
+    SELECT AVG(tripduration) FROM trips
+)
+LIMIT 10
+
+
+d) joiny
+
+
+SELECT u.user_id, u.birth_year, u.gender, s.station_name AS start_station
+FROM trips t
+JOIN users u ON t.user_id = u.user_id
+JOIN stations s ON t.start_station_id = s.station_id
+LIMIT 10
+
+
+SELECT t.trip_id, s1.station_name AS start_station, s2.station_name AS end_station
+FROM trips t
+JOIN stations s1 ON t.start_station_id = s1.station_id
+JOIN stations s2 ON t.end_station_id = s2.station_id
+LIMIT 10
+
+
+
+SELECT t.trip_id, t.tripduration, 2024 - u.birth_year AS user_age
+FROM trips t
+JOIN users u ON t.user_id = u.user_id
+LIMIT 10
